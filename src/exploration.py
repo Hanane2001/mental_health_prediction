@@ -30,17 +30,17 @@ def compter_valeurs_doublons(df):
 
 def manquants_percent(df):
     somme = compter_valeurs_manquants(df)
-    res = (somme.sum() / df.size) * 100
+    res = (somme.sum() / len(df)) * 100
     return res
 
 
 if __name__ == "__main__":
     data = exporter_data(SOURCE)
     df = pd.DataFrame(data=data)
-    analyse_data(df)
-    nb_manq = compter_valeurs_manquants(df)
-    print(f"nombre manquants est: {nb_manq}")
-    nb_doub = compter_valeurs_doublons(df)
-    print(f"nombre doublons est: {nb_doub}")
+    # analyse_data(df)
+    # nb_manq = compter_valeurs_manquants(df)
+    # print(f"nombre manquants est: {nb_manq}")
+    # nb_doub = compter_valeurs_doublons(df)
+    # print(f"nombre doublons est: {nb_doub}")
     percent_manq = manquants_percent(df)
     print(f"porcentage des valeurs manquants est: {percent_manq}%")
