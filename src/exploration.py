@@ -33,6 +33,20 @@ def manquants_percent(df):
     res = (somme.sum() / len(df)) * 100
     return res
 
+def eviter_doublons(df):
+    df = df.drop_duplicates()
+    return df
+
+def verifier_types_col(df, col):
+    types = df[col].dropna().apply(type).unique()
+    print(col, types)
+
+def verifier_types(df):
+    for col in df.columns:
+        types = df[col].apply(type).nunique()
+        if types > 1:
+            print(col, types)
+
 
 if __name__ == "__main__":
     data = exporter_data(SOURCE)
@@ -40,7 +54,10 @@ if __name__ == "__main__":
     # analyse_data(df)
     # nb_manq = compter_valeurs_manquants(df)
     # print(f"nombre manquants est: {nb_manq}")
+    # percent_manq = manquants_percent(df)
+    # print(f"porcentage des valeurs manquants est: {percent_manq}%")
     # nb_doub = compter_valeurs_doublons(df)
     # print(f"nombre doublons est: {nb_doub}")
-    percent_manq = manquants_percent(df)
-    print(f"porcentage des valeurs manquants est: {percent_manq}%")
+    # df = eviter_doublons(df)
+    # verifier_types(df)
+    verifier_types_col(df, "Diet_Quality")
