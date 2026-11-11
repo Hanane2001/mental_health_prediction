@@ -57,14 +57,14 @@ def detection_outliers(df, col):
     return outliers
 
 
-if __name__ == "__main__":
-    data = exporter_data(SOURCE)
-    df = pd.DataFrame(data)
-    visualisation_histogramme(df, "Study_Hours_Per_Week")
-    visualisation_boxplot(df, "Study_Hours_Per_Week")
-    visualisation_barres(df, "Gender")
-    visualisation_barres(df, "Mental_Health_Risk")
-    visualiser_feature_target(df, "Sleep_Hours", "Mental_Health_Risk")
-    outliers = detection_outliers(df, "Study_Hours_Per_Week")
-    print(outliers)
-    visualiser_correlations(df)
+# if __name__ == "__main__":
+#     data = exporter_data(SOURCE)
+#     df = pd.DataFrame(data)
+#     visualisation_histogramme(df, "Study_Hours_Per_Week")
+#     visualisation_boxplot(df, "Study_Hours_Per_Week")
+#     visualisation_barres(df, "Gender")
+#     visualisation_barres(df, "Mental_Health_Risk")
+#     visualiser_feature_target(df, "Sleep_Hours", "Mental_Health_Risk")
+#     outliers = detection_outliers(df, "Study_Hours_Per_Week")
+#     print(outliers)
+#     visualiser_correlations(df)
