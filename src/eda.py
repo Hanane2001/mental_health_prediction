@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-from exploration import SOURCE, exporter_data
+import numpy as np
+from src.exploration import SOURCE, exporter_data
 
 def visualisation_boxplot(df, col):
     plt.figure(figsize=(8,5))
@@ -54,6 +55,7 @@ def detection_outliers(df, col):
     outliers = df[(df[col] < min_val) | (df[col] > max_val)]
     print(f"colonne: {col}")
     print(f"nombre des outliers: {len(outliers)}")
+    df[col] = np.clip(df[col], a_min = min_val, a_max=max_val)
     return outliers
 
 

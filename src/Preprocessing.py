@@ -5,7 +5,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
-from exploration import SOURCE, exporter_data
+from src.exploration import SOURCE, exporter_data
 
 def definir_xy(df, target):
     X = df.drop(columns=[target])

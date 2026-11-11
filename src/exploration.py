@@ -2,7 +2,8 @@ import pandas as pd
 import os
 from pathlib import Path
 
-SOURCE = Path("data/raw")
+BASE_DIR = Path(__file__).resolve().parent.parent
+SOURCE = BASE_DIR / "data" / "raw"
 def exporter_data(path):
     if not os.path.exists(path):
         return []
@@ -11,6 +12,7 @@ def exporter_data(path):
         return data
 
 def analyse_data(df):
+    print(f"les 5 premier lignne: {df.head()} ")
     print(f"shape: {df.shape}")
     print(f"nombre dimension: {df.ndim}")
     print("les types de donnees: ")
