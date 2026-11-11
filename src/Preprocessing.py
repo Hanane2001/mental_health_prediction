@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 from src.exploration import SOURCE, exporter_data
@@ -28,13 +28,30 @@ def cree_preprocessing(num_col, cat_col):
         ("imputer", SimpleImputer(strategy="median")),
         ("scaler", StandardScaler())
     ])
-    cat_pipline = Pipeline([
+    onehot_col = [
+        "Gender",
+        "Part_Time_Job",
+        "Previous_Mental_Health_History"
+    ]
+    ordinal_col = [
+        "Physical_Activity",
+        "Diet_Quality"
+    ]
+    onehot_pipline = Pipeline([
         ("imputer", SimpleImputer(strategy="most_frequent")),
         ("encode", OneHotEncoder(handle_unknown="ignore"))
     ])
+    ordinal_pipline = Pipeline([
+        ("imputer", SimpleImputer(strategy="most_frequent")),
+        ("encode", OrdinalEncoder(categories=[
+            ["Low", "Moderate", "High"],
+            ["Poor", "Average", "Good"]
+        ], handle_unknown="use_encoded_value", unknown_value=-1))
+    ])
     preprocessor = ColumnTransformer([
         ("num", num_pipline, num_col),
-        ("cat", cat_pipline, cat_col)
+        ("onehot", onehot_pipline, onehot_col),
+        ("ordinal", ordinal_pipline, ordinal_col)
     ])
     return preprocessor
 
