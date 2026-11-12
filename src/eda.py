@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import seaborn as sns
 import pandas as pd
 import numpy as np
 from src.exploration import SOURCE, exporter_data
@@ -38,11 +39,8 @@ def visualiser_feature_target(df, feature, target):
 def visualiser_correlations(df):
     correlation = df.select_dtypes(include="number").corr()
     plt.figure(figsize=(12, 8))
-    plt.imshow(correlation, cmap="coolwarm", vmin=-1, vmax=1)
-    plt.colorbar()
-    plt.xticks(range(len(correlation.columns)), correlation.columns, rotation=90)
-    plt.yticks(range(len(correlation.columns)), correlation.columns)
-    plt.title("matrice de correlation")
+    sns.heatmap(correlation, annot=True, fmt=".2f", cmap="coolwarm", center=0)
+    plt.title("matrice de correlation", fontsize=14, fontweight="bold")
     plt.tight_layout()
     plt.show()
 
