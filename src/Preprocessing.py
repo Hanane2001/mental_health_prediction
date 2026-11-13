@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
@@ -8,13 +9,13 @@ from sklearn.pipeline import Pipeline
 from src.exploration import SOURCE, exporter_data
 
 def definir_xy(df, target):
-    X = df.drop(columns=[target])
+    X = df.drop(columns=[target, "Student_ID"])
     y = df[target]
     return X, y
 
 def separer_train_test(X, y):
-    x_train, y_train, x_test, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
-    return x_train, y_train, x_test, y_test
+    x_train, x_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+    return x_train, x_test, y_train, y_test
 
 def separer_types(x_train):
     num_col = x_train.select_dtypes(include=["int64", "float64"]).columns.tolist()
@@ -59,6 +60,14 @@ def applique_preprocessing(preprocessor, x_train, x_test):
     x_train_prepared = preprocessor.fit_transform(x_train)
     x_test_prepared = preprocessor.transform(x_test)
     return x_train_prepared, x_test_prepared
+
+def save_data(x_train, y_train, x_test, y_test, path="../data/processed"):
+    os.makedirs(path, exist_ok=True)
+    x_train.to_csv(f"{path}/x_train.csv", index=False)
+    y_train.to_frame().to_csv(f"{path}/y_train.csv", index=False)
+    x_test.to_csv(f"{path}/x_test.csv", index=False)
+    y_test.to_frame().to_csv(f"{path}/y_test.csv", index=False)
+    print("les donnees sont sauvegardees avec succes")
 
 # if __name__ == "__main__":
 #     df = exporter_data(SOURCE)
