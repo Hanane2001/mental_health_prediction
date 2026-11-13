@@ -25,7 +25,7 @@ def cross_validate_models(models, x, y):
         res1.append(res)
     res_df = pd.DataFrame(res1)
     res_df = res_df.set_index("Model").round(4)
-    print(f"\n comparaison des models: {res_df}")
+    # print(f"\n comparaison des models: {res_df}")
     return res_df
 
 def grid_search_models(models, x, y):
