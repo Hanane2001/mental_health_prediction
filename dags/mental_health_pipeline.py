@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 
-PROJECT_DIR = Path(__file__).resolve().parents[1]
+PROJECT_DIR = Path("/opt/airflow")
 RAW_DATA = PROJECT_DIR / "data" / "raw" / "student_mental_health.csv"
 PROCESSED_DIR = PROJECT_DIR / "data" / "processed"
 MODELS_DIR = PROJECT_DIR / "models"
